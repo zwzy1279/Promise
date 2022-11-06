@@ -1,0 +1,17 @@
+<script>
+    /*
+    await关键字
+    只能写在asnync声明的函数里面
+    await后面跟的是一个Promise()
+    await Promise一般返回的是promise成功的结果，相当于then
+    */
+   let obj=new Promise((resolve,reject)=>{
+    resolve("我成功啦");
+   });
+   async function fn(){
+    let result=await obj;//这个obj就是上面返回的一个Promise
+    console.log(result);//这个result就是上面返回的Promise成功的结果
+   }
+   fn();
+
+</script>

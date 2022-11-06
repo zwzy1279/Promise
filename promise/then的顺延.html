@@ -1,0 +1,14 @@
+<script>
+    /*
+上一个then没有处理，就会顺延到下一个then，直到处理
+catch
+或者将正确的写then里，错误的写catch里
+    */
+   let obj=new Promise((resolve,reject)=>{
+    resolve("我成功了");
+    //reject("我失败了");
+   })
+   obj.then(res=>{console.log(res);return 666;},err1=>{console.log("err1"+err1)})//return 666这里的应该拿给到下一个//我成功了
+   .then(null,err2=>{console.log("err2="+err2)})
+   .then(res3=>{console.log("res3="+res3)},err3=>{console.log("err3="+err3)});//res3=666
+</script>

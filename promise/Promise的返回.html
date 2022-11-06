@@ -1,0 +1,32 @@
+<Script>
+//    let p=new Promise(()=>{});
+//    console.log(p);//这个new Promise()会返回一个promise,上面有显示他的状态，看是否等待，成功还是失败
+
+   function fn(counter){
+    let p2=new Promise((resolve,reject)=>{
+        //执行器里面写异步代码
+        setTimeout(()=>{
+            let sum=0;
+            if(counter>0){
+                for(let i=0;i<=counter;i++){
+                    sum+=i;
+                }
+                resolve(sum);
+            }
+            else{
+                reject(counter+"没有符合条件");
+            }
+        },1000);
+    })
+    //这个fn2函数给他返回里面的p2，因为里面的p2是被返回了一个Promise
+    return p2;
+    //返回到调用处，调用处看着个返回的Promise是成功还是失败的，也就是看走的是resolve还是reject函数
+    //如果这个函数体走的是resolve，那么返回
+   }
+   let result=fn(100);//返回的是Promise
+   console.log(result);
+   //Promise是一个对象，上面有一个then方法。用来获取成功与否
+   //then中两个参数，都是回调函数
+   //如果函数走的是resolve,那么then会走第一个回调函数，里面的参数就是成功的结果
+   result.then((val)=>{console.log("sum="+val)},(err)=>{console.log(err)});
+</Script>

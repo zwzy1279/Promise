@@ -1,0 +1,27 @@
+<script>
+    /*
+同步代码也就是代码的书写顺序和代码一行一行执行下来的顺序一样，书写顺序和执行顺序一样就是同步代码
+异步代码就是代码的书写顺序和代码的执行顺序不一样
+像定时器，事件绑定都是属于异步代码，ES6前面我们只能靠回调函数的方法来解决异步的问题，也就是让他跟同步代码一样书写顺序和执行顺序一样同步执行
+
+现在解决异步问题，用Promise  anys+...
+一定得会Promise
+    */
+   //回调函数
+   function add(counter,fn1,fn2){
+    //异步代码
+    setTimeout(()=>{
+        if(counter>0){
+        let sum=0;
+        for(let i=0;i<=counter;i++){
+            sum=sum+i;
+        }
+        fn1(sum);//将总和传进去给回调函数，这样能够解决异步问题
+    }
+    else{
+        fn2(counter+"不能运算");
+    }
+    },3000);
+   }
+   add(100,(value)=>{console.log("总和是"+value)},(err)=>{console.log(err)});//这里err接收到的是fn2()传进来的字符串
+</script>

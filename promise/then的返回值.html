@@ -1,0 +1,20 @@
+<script>
+    /*
+    只要你敢new Promise(()={})必定会返回一个Promise对对象
+    这个新返回的对象只要你敢then那么就会返回一个新的Promise对象，一直循环下去
+    第一个then后面的then都取决于上一个then是做了什么(执行的哪一个做了什么），而不看上一个then 返回的Promsise成功与否
+
+    有以下四种情况，不论第一个then返回的Promise成功与否
+    1.第一个then返回的Promise中返回一个普通的数据，那么第二个then返回的Promise是成功的，他的结果就是上一个返回的值或者是undefined
+    2.第一个then返回的Promise中返回的是一个Promise,那么第二个then 返回的Promise成功与否取决于上一个返回的promise成功与否
+    3.返回的是thenable同2的情况
+    4.第一个then返回的Promise中抛出一个错误,那么第二个then 返回的Promise是失败的
+    */
+let obj=new Promise((resolve,reject)=>{
+    //resolve("成功了");
+    reject("失败了");
+});
+obj.then(
+    res=>{console.log("res1="+res);throw TypeError("出现错误啦");},err=>{console.log("err1="+err)})//res1=成功了
+    .then(res2=>{console.log("res2="+res2)},err2=>{console.log("err2="+err2)});//res2=undefined
+</script>

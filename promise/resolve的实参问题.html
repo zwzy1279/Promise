@@ -1,0 +1,27 @@
+<script>
+    /*
+        resolve参数可以是
+        1.普通数据
+        2.可以是Promise的对象
+        3.可以是thenable对象,它里面有一个then方法
+    */
+   let obj=new Promise(()=>{});//因为new Promise()返回的是一个Promise，这个也是个对象，让一个变量来接受这个对象，这个对象上有then方法
+
+   let p=new Promise((resolve,reject)=>{
+    reject("p失败了");
+   })
+   let obj2=new Promise((resolve,reject)=>{
+    resolve(p);//这个resolve本来是成功的，但里面传进来的是一个promise，那么obj2到底走的是成功还是失败呢，取决于里面的p
+   })
+   obj2.then(res=>{console.log("obj2成功了"+res)},err=>{console.log("obj2失败了"+err)});//obj2失败了p失败了
+
+   let obj3=new Promise((resolve,reject)=>{
+    resolve({//这个resolve本来是成功的，但是里面穿了一个thenable的对象，该对象有一个then方法，那么外头的Promise成功与否就看里面then的Promise成功与否
+        then(resolve,reject){
+            //reject("then的Promise错误了");
+            resolve("then的promise成功了");
+        }
+    });
+   })
+   obj3.then(res=>{console.log("obj3成功了"+res)},err=>{console.log("obj3失败了"+err)});//obj3失败了then的Promise错误了
+</script>

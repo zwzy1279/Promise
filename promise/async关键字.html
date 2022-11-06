@@ -1,0 +1,54 @@
+<script>
+    /*
+        async是一个关键字，用来声明一个函数是异步函数
+        可以用一以下的方式来声明异步函数
+    async function fn(){
+    console.log("fn...");
+   }
+   fn();
+   let fn2=async function(){
+    console.log("fn2...");
+   }
+   fn2();
+   //也可以是箭头函数
+   let fn3=async()=>{
+    console.log("fn3...");
+   }
+   fn3();
+
+        用async声明的异步函数返回的是一个promise
+        这个Promise成功与否取决于返回的是什么
+        1.如果返回的是普通数据，那么Promise是成功的
+        2.如果返回的是一个新的Promise(resolve,reject),那么就看这个新的是成功还是失败
+        3.如果返回的是thenable这个对象，看的是then的这个方法
+        4.如果是抛出一个错误，那么返回的Promise是一个失败的
+    */
+   async function fn(){
+    console.log("fn...");
+   }
+   fn();
+   let fn2=async function(){
+    console.log("fn2...");
+   }
+   fn2();
+   //也可以是箭头函数
+   let fn3=async()=>{
+    console.log("fn3...");
+   }
+   fn3();
+
+   async function fn4(){
+    console.log("fn4...");
+    //return 666;
+    return new Promise((resolve,reject)=>{
+    {
+        reject("fn4失败了");
+    }
+    }
+    )
+   }
+   
+   //用async声明的异步函数返回的是一个promise
+   fn4().then(res=>console.log(res)).catch(err=>console.log(err));
+
+</script>

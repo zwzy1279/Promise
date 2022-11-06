@@ -1,0 +1,22 @@
+<script>
+    /*
+Promise的静态方法,直接打点去调用这些方法，返回的也是一个全新的Promise
+.reject
+.resolve
+.all  表示所有的Promise都成功后的结果。或者有失败的，返回第一个失败的结果
+.any  返回第一个成功的
+.allSettled 返回所有Promise,不论失败与否
+    */
+   let obj1=Promise.resolve("obj1成功");
+    obj1.then(res=>{console.log(res)});
+
+    let obj2=Promise.reject("obj2失败");
+   // obj2.then(err=>{console.log(err)});// Uncaught (in promise) obj2失败,接收失败的得用catch,不然用then会报错
+   obj2.catch(err=>{console.log(err)});
+
+    Promise.all([obj1,obj2]).then(res=>console.log(res)).catch(err=>console.log(err));//obj2失败
+
+    Promise.any([obj1,obj2]).then(res=>console.log(res)).catch(err=>console.log(err));
+
+    Promise.allSettled([obj1,obj2]).then(res=>console.log(res)).catch(err=>console.log(err));//[{…}, {…}]
+</script>

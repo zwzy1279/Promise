@@ -1,0 +1,25 @@
+<script>
+    /*
+        Promise()只能通过new使用，在newPromise时，必须传进去一个执行器（不然会报错），这个执行器立马执行的 
+        当执行器里什么都没有时，此时Promise处于等待状态
+
+        执行器是一个函数，执行器的参数有两个，一个是resolve,一个是reject
+        这两个参数都是函数
+        resolve终值，调用此函数，Promise的状态会从等待变成成功
+        reject叫做拒因，拒绝的原因，调用此函数，Promise的状态会从等待变成失败
+        执行器的两个参数，也就是两个函数必须等外界有调用时才会执行
+        所以Promise有三种状态，分别是等待，成功，失败
+        Promise的状态只能从等待到失败或者等待到成功
+
+    */
+   let p=new Promise((resolve,reject)=>{
+    //在执行器函数里面写异步代码
+    setTimeout(()=>{
+     resolve("hello");   
+     //reject("失败了");
+    },3000);
+   });
+   console.log(p);//当传进去一个执行器就不报错了,当执行器里什么都没有时，此时Promise处于等待状态
+   //Promise {<pending>}
+
+</script>
